@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de CRUD</title>
+    <style>
+    body {
+        background-image: url('parede.jpg');
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 20px;
+    }
+
+    h1 {
+        font-family:Verdana, Geneva, Tahoma, sans-serif;
+        color:black;
+    }
+
+    .form-container {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        max-width: 500px;
+        margin: auto;
+    }
+
+    form {
+        border: 4px solid blue;
+        background:aquamarine;
+        padding: 70px;
+        display: inline-block;
+    }
+
+    p {
+        padding: 2px;
+        display:inline-table;
+    }
+
+    </style>
+</head>
+<body>
+    <script type="text/javascript">
+        function ValidarDescricao() {
+            if(desc.value.trim() === "") {
+                desc.style.background = "gray";
+                alert("Volte e preenche o campo!")
+                return false;
+            } else {
+                desc.style.background = "white";
+                return false;
+            }
+        }
+
+        function ValidarQuantidade() {
+            var erro = false;
+            if(quantidade.value.trim() === "") {
+                erro = true;
+            } else {
+                if(isNaN(quantidade.value) === true) {
+                    erro = true;
+                } else {
+                    var nquantidade = parseInt(quantidade.value);
+                    if(nquantidade < 1 || nquantidade > 999) {
+                        erro = true;
+                    }
+                }
+            }
+            if (erro === true) {
+               quantidade.style.background = "gray";
+               alert("A quantidade em estoque não pode ultrapassar este limite, por favor preencha os campos corretamente!");
+            } else {
+                quantidade.style.background = "white";
+            }
+            return !erro;
+        }
+
+        function ValidarProduto() {
+            var erro = false;
+            if(produto.value.trim() === "") {
+                erro = true;
+            } else {
+                if(isNaN(produto.value) === true) {
+                    erro = true;
+                } else {
+                    var nproduto = parseInt(produto.value);
+                    if(nproduto < 1 || nproduto > 999) {
+                        erro = true;
+                    }
+                }
+            }
+            if (erro === true) {
+                produto.style.background = "gray";
+               alert("A quantidade do produto não pode ultrapassar este limite, por favor preencha os campos corretamente!");
+            } else {
+                produto.style.background = "white";
+            }
+            return !erro;
+        }
+    </script>
+
+    <div class="form-container">
+        <form>
+            <h1>Produtos</h1>
+                <p><label>n° Produto </label>
+                <input type="number" id="produto" name="produto" onblur="ValidarProduto()" required></p><br>
+                <p><label>Nome do Produto </label>
+                <input type="text" id="nome" name="nome" required></p><br>
+                <p><label>Quantidade em Estoque </label>
+                <input type="number" id="quantidade" name="quantidade" onblur="ValidarQuantidade()" required></p><br>
+                <p><label>Data de Produção </label>
+                <input type="date" id="producao" name="producao" required></p><br>
+                <p><label>Data de Vencimento </label>
+                <input type="date" id="vencimento" name="vencimento" required></p><br>
+
+                <p><label>Descrição </label>
+                <input type="text" id="desc" name="desc" onblur="ValidarDescricao()"></p><br>
+                <button type="submit">Envio</button>
+        </form>
+    </div>
+    <center><br>
+    Tiago Felix da Silva
+    </center>    
+</body>
+</html>
