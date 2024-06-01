@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de CRUD</title>
+    <style>
+             body {
+            background-image: url('parede.jpg');
+            font-family: 'Calibri'; 
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        form {
+        border: 2px solid blue;
+          padding: 20px;
+          display:inline-block;
+          background-color: aquamarine;
+            
+        }
+        h2 {
+            color:  darkblue
+        }
+        .form-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 300px;
+            margin: 0 auto; 
+        }
+    </style>
+
+
+    <script type="text/javascript">
+function validarFormulario() {
+    var nome = document.getElementById("nome").value;
+    var sexo = document.getElementById("Sexo").value;
+    var nacionalidade = document.getElementById("nacionalidade").value;
+    var rg = document.getElementById("RG").value;
+    var CPF = document.getElementById("CPF").value;
+    var Telefone = document.getElementById("Telefone").value;
+    var Endereco = document.getElementById("Endereco").value;
+    var Email = document.getElementById("Email").value;
+
+    if (nome === "" || sexo === "" || rg === "" || CPF === "" || Email === "" || Telefone === "" ||Endereco === ""||nacionalidade === "") {
+        alert("Por favor, preencha todos os campos obrigatórios do formulário.");
+        return false;
+    }
+
+    return true;
+}
+function apenasLetras(e) {
+    var tecla = e.keyCode ? e.keyCode : e.which;
+    if ((tecla >= 65 && tecla <= 90) || (tecla >= 97 && tecla <= 122) || tecla == 32) {
+        return true;
+    } else {
+        e.preventDefault();
+        return false;
+    }
+}
+
+function apenasNumeros(e) {
+    var tecla = e.keyCode ? e.keyCode : e.which;
+    if ((e.target.id === "RG" || e.target.id === "Telefone" || e.target.id === "CPF") && (tecla >= 48 && tecla <= 57)) {
+        return true;
+    } else {
+        e.preventDefault();
+        return false;
+    }
+}
+window.onload = function() {
+
+document.getElementById("CPF").addEventListener("input", function(event) {
+        var cpfInput = event.target;
+        cpfInput.value = formatarCPF(cpfInput.value);
+    });
+    document.getElementById("RG").addEventListener("input", function(event) {
+        var cpfInput = event.target;
+        cpfInput.value = formatarCPF(cpfInput.value);
+    });
+    document.getElementById("Telefone").addEventListener("input", function(event) {
+        var cpfInput = event.target;
+        cpfInput.value = formatarCPF(cpfInput.value);
+    });
+
+
+
+
+    document.getElementById("nome").addEventListener("keypress", apenasLetras);
+    document.getElementById("nacionalidade").addEventListener("keypress", apenasLetras);
+    document.getElementById("Endereco").addEventListener("keypress", apenasLetras);
+    document.getElementById("Bairro").addEventListener("keypress", apenasLetras);
+    document.getElementById("Cidade").addEventListener("keypress", apenasLetras);
+
+    document.getElementById("Telefone").addEventListener("keypress", apenasNumeros);
+    document.getElementById("RG").addEventListener("keypress", apenasNumeros);
+    document.getElementById("CPF").addEventListener("keypress", apenasNumeros);
+}
+    </script>
+</head>
+<body>
+    <div class="form-container">
+    <form id="formulario" onsubmit="return validarFormulario()">
+        
+        <h2 id="titulo">Cliente</h2>
+        Tipo de pessoa:   <select id="pessoa" name="tipo de pessoa">
+            <option value="fisica">Física</option>
+            <option value="juridica">Juridica</option>
+</select>
+       
+    <p><label>Nome</label>
+        <input type="text" id="nome" value="" size="20" maxlength="50" onblur="validarnome()" />
+        <p><label>RG</label>
+            <input type="text" id="RG" placeholder="9999999999" value="" size="20" maxlength="10" onblur="validarrg()" />
+            <p><label>Nacionalidade</label>
+                <input type="text" id="nacionalidade" value="" size="17" maxlength="20" onblur="validarNacionalidade()" />
+        <p><label>Endereço</label>
+            <input type="text" id="Endereco" value="" size="20" maxlength="50" onblur="validarEndereco()" /> 
+<br><br><label>
+    Bairro:</label> <input type="text" id="Bairro" name="Bairro" size="14">
+    <br><br>
+    <label>Cidade:</label>
+                <input type="text" id="Cidade" name="Cidade"> 
+                <br><br>
+            <label>Estado:</label>
+            <select id="Estado" name="Estado" size="1">
+                
+                <option value="">Selecione...</option>
+                <option value="AC">AC</option>
+                <option value="AL">AL</option>
+                <option value="AP">AP</option>
+                <option value="AM">AM</option>
+                <option value="BA">BA</option>
+                <option value="CE">CE</option>
+                <option value="DF">DF</option>
+                <option value="ES">ES</option>
+                <option value="GO">GO</option>
+                <option value="MA">MA</option>
+                <option value="MT">MT</option>
+                <option value="MS">MS</option>
+                <option value="MG">MG</option>
+                <option value="PA">PA</option>
+                <option value="PB">PB</option>
+                <option value="PR">PR</option>
+                <option value="PE">PE</option>
+                <option value="PI">PI</option>
+                <option value="RJ">RJ</option>
+                <option value="RN">RN</option>
+                <option value="RS">RS</option>
+                <option value="RO">RO</option>
+                <option value="RR">RR</option>
+                <option value="SC">SC</option>
+                <option value="SP">SP</option>
+                <option value="SE">SE</option>
+                <option value="TO">TO</option>
+            </select>
+            <p><label>Telefone</label>
+                <input type="tel" id="Telefone" name="phone" pattern="([0-9]{2}) [0-9]{5}-[0-9]{4}" placeholder="(99) 99999-9999" value="" size="20" maxlength="15" onblur="validarTelefone()" />
+                <p><label>Email</label>
+                    <input type="email" id="Email" name="phone" placeholder="email@gmail.com" value="" size="20" maxlength="40" onblur="validarEmail()" />
+                    <p><label>CPF</label>
+                        <input type="text" id="CPF" name="phone" pattern="[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}" placeholder="999.999.999-99" value="" size="20" maxlength="14" onblur="validarCPF()" />
+                        <br><br>   
+
+        Sexo
+        <select id="Sexo" name="Sexo">
+            <option value="Masculino">Masculino</option>
+            <option value="Feminimo">Feminino</option>
+</select><br><br>
+        <button type="submit">Enviar</button>
+   
+    </form>
+</div>
+<center>
+    <br>Enzo Martins Guinzani
+</center>
+</body>
+</html>
